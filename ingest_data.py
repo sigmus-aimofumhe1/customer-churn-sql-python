@@ -2,13 +2,13 @@ import os
 import pandas as pd
 import psycopg2
 
-# 1. Database Connection Parameters
+# 1. Dynamic Database Connection Parameters (Reads from local .env)
 DB_PARAMS = {
-    "host": "localhost",
-    "database": "customer_churn",
-    "user": "postgres",
-    "password": "dydxdydx1000",  # <-- Put your actual local Postgres password here
-    "port": "5433"
+    "host": os.getenv("DB_HOST", "localhost"),
+    "database": os.getenv("DB_NAME", "customer_churn"),
+    "user": os.getenv("DB_USER", "postgres"),
+    "password": os.getenv("DB_PASSWORD", "postgres"),  # Default fallback
+    "port": os.getenv("DB_PORT", "5432")              # Default fallback (Standard Postgres)
 }
 
 # 2. SQL Schema Definition
@@ -33,24 +33,34 @@ CREATE TABLE IF NOT EXISTS telco_churn (
     paperless_billing VARCHAR(5),
     payment_method VARCHAR(40),
     monthly_charges NUMERIC(10, 2),
-    total_charges TEXT, -- Kept as TEXT to handle empty spaces safely
+    total_charges TEXT, 
     churn VARCHAR(5)
 );
 """
 
 def main():
-    # 3. Path to your specific copy CSV file
+    # 3. Path to your specific copy CSV file (Using relative pathing)
     csv_path = os.path.join("data", "WA_Fn-UseC_-Telco-Customer-Churn-Copy.csv")
     print(f"Reading data from {csv_path}...")
+    
+    if not os.path.exists(csv_path):
+        print(f"❌ Error: Could not find the dataset at {csv_path}. Make sure it's in your data/ folder!")
+        return
+
     df = pd.read_csv(csv_path)
     
     # Clean up column headers to match lowercase SQL standards
     df.columns = [col.lower().replace('-', '_').replace(' ', '_') for col in df.columns]
     
     # 4. Connect to PostgreSQL and build the architecture
-    print("Connecting to PostgreSQL...")
-    conn = psycopg2.connect(**DB_PARAMS)
-    cursor = conn.cursor()
+    print(f"Connecting to PostgreSQL on port {DB_PARAMS['port']}...")
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cursor = conn.cursor()
+    except Exception as e:
+        print("❌ Database Connection Failed! Verify your local environment parameters match.")
+        print(f"Error Details: {e}")
+        return
     
     print("Creating table schema if it doesn't exist...")
     cursor.execute(CREATE_TABLE_SQL)
@@ -63,10 +73,8 @@ def main():
     # 5. Bulk insertion into the database
     print("Streaming rows into the database...")
     
-    # Convert dataframe values to a list of tuples for SQL execution
     records = [tuple(x) for x in df.to_numpy()]
     
-    # Dynamic insert string
     insert_query = """
     INSERT INTO telco_churn VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
     """
