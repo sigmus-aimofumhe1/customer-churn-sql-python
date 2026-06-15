@@ -1,14 +1,20 @@
 import os
 import pandas as pd
 import psycopg2
+from dotenv import load_dotenv  
 
-# 1. Dynamic Database Connection Parameters (Reads from local .env)
+# Explicitly resolve the absolute path to the local .env file to bypass IDE terminal restrictions
+current_dir = os.path.dirname(os.path.abspath(__file__))
+dotenv_path = os.path.join(current_dir, '.env')
+load_dotenv(dotenv_path=dotenv_path)  
+
+# 1. Dynamic Database Connection Parameters (Now reads from local .env successfully)
 DB_PARAMS = {
     "host": os.getenv("DB_HOST", "localhost"),
     "database": os.getenv("DB_NAME", "customer_churn"),
     "user": os.getenv("DB_USER", "postgres"),
-    "password": os.getenv("DB_PASSWORD", "postgres"),  # Default fallback
-    "port": os.getenv("DB_PORT", "5432")              # Default fallback (Standard Postgres)
+    "password": os.getenv("DB_PASSWORD", "postgres"),  # Falls back to 'postgres' if no .env match
+    "port": os.getenv("DB_PORT", "5432")              # Falls back to '5432' if no .env match
 }
 
 # 2. SQL Schema Definition
