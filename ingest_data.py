@@ -63,7 +63,7 @@ def main():
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cursor = conn.cursor()
-    except Exception as e:
+    except psycopg2.Error as e:
         print("❌ Database Connection Failed! Verify your local environment parameters match.")
         print(f"Error Details: {e}")
         return
