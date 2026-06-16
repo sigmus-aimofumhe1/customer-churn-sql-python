@@ -62,22 +62,64 @@ ORDER BY churn_count DESC;
 
 
 -- 4. NUMERICAL AGGREGATIONS & OUTLIERS
--- Q: What is the average, minimum, and maximum tenure of our customers?
+-- What is the average, minimum, and maximum tenure of our customers?
 -- (Helps identify the typical lifespan of a customer)
+SELECT AVG(tenure) AS avg_tenure, 
+       MIN(tenure) AS min_tenure, 
+       MAX(tenure) AS max_tenure
+FROM telco_churn;
+
+-- What is the average monthly charge for customers who churned vs. those who stayed?
+
+-- The query was giving an error because total_charges is stored as a string
+-- and there are some non-numeric values (like empty strings) in that column. 
+-- We need to clean the data before we can calculate the average.
+
+SELECT
+    column_name,
+    data_type
+FROM information_schema.columns
+WHERE table_name = 'telco_churn'
+  AND column_name = 'total_charges';
+
+SELECT customer_id, total_charges
+FROM telco_churn
+WHERE TRIM(total_charges) = '';
+
+SELECT DISTINCT total_charges
+FROM telco_churn
+WHERE TRIM(total_charges) <> ''
+  AND TRIM(total_charges) !~ '^[0-9]+(\.[0-9]+)?$';
+
+SELECT 
+    churn,
+    AVG(
+        CAST(NULLIF(TRIM(total_charges), '') AS FLOAT)
+    ) AS avg_total_charges
+FROM telco_churn
+GROUP BY churn;
 
 
--- Q: What is the average monthly charge for customers who churned vs. those who stayed?
--- (Tests the theory that higher bills cause people to leave)
-
-
--- Q: Are there any data anomalies? 
+-- Are there any data anomalies? 
 -- (e.g., Customers with 0 tenure months but positive total charges, or vice versa)
+WITH cleaned_data AS (
+    SELECT *,
+           -- Convert empty strings to NULL, then cast to float
+           CAST(NULLIF(TRIM(total_charges), '') AS FLOAT) AS total_charges_float
+    FROM telco_churn
+)
+SELECT *
+FROM cleaned_data
+WHERE (tenure = 0 AND total_charges_float > 0)
+   OR (tenure > 0 AND (total_charges_float IS NULL OR total_charges_float = 0));
 
 
-
--- ------------------------------------------
 -- 5. SEGMENTATION AND DRILL-DOWN
--- ------------------------------------------
 
--- Q: For customers on a Month-to-Month contract, what is their average tenure before they churn?
+-- For customers on a Month-to-Month contract, what is their average tenure before they churn?
 -- (Pins down the exact "risk window" where customer success teams should intervene)
+SELECT 
+    AVG(tenure) AS avg_months_before_churn
+FROM telco_churn
+WHERE contract = 'Month-to-month' 
+  AND churn = 'Yes';
