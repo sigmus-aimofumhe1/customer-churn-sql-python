@@ -100,7 +100,7 @@ GROUP BY churn, above_average_flag;
 
 -- Q: How long has the customer been with the company relative to a standard two-year benchmark?
 -- (Create a metric called 'tenure_years' by converting the tenure months into years [tenure / 12.0])
-
+select * from telco_churn;
 
 
 
