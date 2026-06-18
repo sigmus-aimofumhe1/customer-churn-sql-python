@@ -308,4 +308,4 @@ SELECT
     is_new_m2m_customer, 
     churn 
 FROM v_ml_churn_input 
-LIMIT 15;
+LIMIT 20;
