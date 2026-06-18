@@ -306,6 +306,6 @@ SELECT
     historical_avg_monthly_spend, 
     above_average_flag, 
     is_new_m2m_customer, 
-    churn 
+    churn  
 FROM v_ml_churn_input 
-LIMIT 20;
+LIMIT 5;
