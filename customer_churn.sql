@@ -1,1 +1,0 @@
-COPY telco_churn TO '/tmp/telco_churn_data.csv' DELIMITER ',' CSV HEADER;
