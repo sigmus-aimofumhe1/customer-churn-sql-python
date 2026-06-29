@@ -177,15 +177,6 @@ customer-churn-sql-python/
 ├── launch.command                            # One-click macro automation application script for macOS
 └── requirements.txt                          # Master installation dependency package list
 
----
-
-## Local Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/sigmus-aimofumhe1/customer-churn-sql-python.git
-cd customer-churn-sql-python
 ```
 
 Create a virtual environment:
