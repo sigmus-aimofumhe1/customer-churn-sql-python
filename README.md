@@ -2,7 +2,7 @@
 
 An end-to-end **Customer Churn Analytics Platform** that combines **PostgreSQL**, **SQL**, **Python**, **Scikit-Learn**, and **Streamlit** to transform raw telecommunications customer data into actionable business intelligence. The platform demonstrates a production-style analytics workflow, from relational database design and SQL feature engineering to machine learning model development and deployment through an interactive executive dashboard.
 
-**🌐 Live Dashboard:** https://customer-churn-analytic-dashboard.streamlit.app/
+**Live Dashboard:** https://customer-churn-analytic-dashboard.streamlit.app/
 
 ---
 
@@ -221,13 +221,13 @@ Potential enhancements include:
 
 **Sigmus Aimofumhe**
 
-- GitHub: https://github.com/sigmus-aimofumhe1
-- LinkedIn: https://linkedin.com/in/eshiobomhe-aimofumhe/
+- GitHub: *https://github.com/sigmus-aimofumhe1*
+- LinkedIn: *https://linkedin.com/in/sigmus-aimofumhe/*
 
 **Winner Igbogbo**
 
-- GitHub: https://github.com/winner107
-- LinkedIn: https://www.linkedin.com/in/winner-igbogbo
+- GitHub: *https://github.com/winner107*
+- LinkedIn: *https://www.linkedin.com/in/winner-igbogbo*
 
 ---
 
