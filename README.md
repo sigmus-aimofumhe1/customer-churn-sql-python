@@ -1,4 +1,4 @@
-# Executive Customer Churn Analytics Platform
+# Customer Churn Analytics Project
 
 An end-to-end **Customer Churn Analytics Platform** that combines **PostgreSQL**, **SQL**, **Python**, **Scikit-Learn**, and **Streamlit** to transform raw telecommunications customer data into actionable business intelligence. The platform demonstrates a production-style analytics workflow, from relational database design and SQL feature engineering to machine learning model development and deployment through an interactive executive dashboard.
 
