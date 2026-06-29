@@ -1,8 +1,6 @@
-# Executive Analytics Report: Operationalizing Customer Churn Prediction for Telecommunications
+# Executive Analytics Report: Operationalizing Customer Churn Prediction for Telecommunications Company
 
 **Prepared by:** Sigmus Aimofumhe & Winner Igbogbo
-**Target Audience:** Chief Operating Officer (COO), Chief Marketing Officer (CMO), VP of Customer Success
-**Project:** Customer Churn Analytics Platform
 
 ---
 
