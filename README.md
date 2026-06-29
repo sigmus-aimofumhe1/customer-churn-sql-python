@@ -155,18 +155,27 @@ customer-churn-sql-python/
 │   ├── churn_model.pkl                       # Main production ML model binary
 │   └── churn_optimized_rf_model.pkl          # Tuned Random Forest ensemble binary
 │
+├── notebooks/
+│   └── churn_analysis.ipynb                  # Jupyter Notebook detailing exploratory data analysis
+│
+├── sql/
+│   ├── eda_queries.sql                       # Raw SQL metrics scripts for preliminary analytics
+│   └── feature_engineering.sql               # Specialized relational views schema scripts
+│
+├── src/
+│   ├── ai_agent.py                           # Script for experimental LLM/AI model pipeline
+│   ├── ingest_data.py                        # Python script to load datasets into database structures
+│   └── test_env.py                           # Workspace diagnostic configuration test file
+│
+├── reports/
+│   └── final_analytics_report.md             # Detailed executive report markdown file
+│
 ├── .env.example                              # Configuration template for local environment variables
 ├── .gitignore                                # Version control rules to exclude system logs and caches
 ├── README.md                                 # Technical documentation manual
-├── ai_agent.py                               # Script for experimental LLM/AI model pipeline
 ├── app.py                                    # Main Streamlit dashboard application code
-├── churn_analysis.ipynb                      # Jupyter Notebook detailing exploratory data analysis
-├── eda_queries.sql                           # Raw SQL metrics scripts for preliminary analytics
-├── feature_engineering.sql                   # Specialized relational views schema scripts
-├── ingest_data.py                            # Python script to load datasets into database structures
 ├── launch.command                            # One-click macro automation application script for macOS
-├── requirements.txt                          # Master installation dependency package list
-└── test_env.py                               # Workspace diagnostic configuration test file
+└── requirements.txt                          # Master installation dependency package list
 
 ---
 
