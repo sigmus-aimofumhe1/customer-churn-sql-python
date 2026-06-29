@@ -8,7 +8,7 @@ load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# 1. DATABASE RETRIEVAL ENGINE
+# 1. DATABASE RETRIEVAL ENGINES
 def fetch_customer_profile(customer_id: str):
     """Queries the feature-engineered Postgres View for deep account analytics."""
     try:

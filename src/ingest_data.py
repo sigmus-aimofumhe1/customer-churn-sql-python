@@ -17,7 +17,7 @@ DB_PARAMS = {
     "port": os.getenv("DB_PORT", "5432")              # Falls back to '5432' if no .env match
 }
 
-# 2. SQL Schema Definition
+# 2. SQL Schema Definitions
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS telco_churn (
     customer_id VARCHAR(50) PRIMARY KEY,
