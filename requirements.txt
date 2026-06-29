@@ -7,3 +7,5 @@ seaborn
 matplotlib
 python-dotenv
 streamlit
+plotly
+openpyxl
