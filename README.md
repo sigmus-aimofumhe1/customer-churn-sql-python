@@ -141,26 +141,34 @@ To better evaluate performance on an imbalanced classification problem, multiple
 
 ---
 
+---
+
 ## Repository Structure
 
 ```text
 customer-churn-sql-python/
 │
 ├── data/
-│   ├── WA_Fn-UseC_-Telco-Customer-Churn.csv
-│   └── churn_snapshot.csv
+│   ├── WA_Fn-UseC_-Telco-Customer-Churn.csv  # Raw baseline dataset
+│   └── churn_snapshot.csv                    # Clean database static snapshot
 │
 ├── models/
-│   ├── churn_lr_model.pkl
-│   ├── churn_model.pkl
-│   └── churn_optimized_rf_model.pkl
+│   ├── churn_lr_model.pkl                    # Baseline Logistic Regression model binary
+│   ├── churn_model.pkl                       # Main production ML model binary
+│   └── churn_optimized_rf_model.pkl          # Tuned Random Forest ensemble binary
 │
-├── app.py
-├── launch.command
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
+├── .env.example                              # Configuration template for local environment variables
+├── .gitignore                                # Version control rules to exclude system logs and caches
+├── README.md                                 # Technical documentation manual
+├── ai_agent.py                               # Script for experimental LLM/AI model pipeline
+├── app.py                                    # Main Streamlit dashboard application code
+├── churn_analysis.ipynb                      # Jupyter Notebook detailing exploratory data analysis
+├── eda_queries.sql                           # Raw SQL metrics scripts for preliminary analytics
+├── feature_engineering.sql                   # Specialized relational views schema scripts
+├── ingest_data.py                            # Python script to load datasets into database structures
+├── launch.command                            # One-click macro automation application script for macOS
+├── requirements.txt                          # Master installation dependency package list
+└── test_env.py                               # Workspace diagnostic configuration test file
 
 ---
 
