@@ -222,3 +222,4 @@ __marimo__/
 *.session.sql
 .env
 *.pkl
+.DS_Store
